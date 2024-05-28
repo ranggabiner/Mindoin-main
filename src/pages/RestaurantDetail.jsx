@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { Heart, Star } from "lucide-react";
+import { Heart } from "lucide-react";
 import restaurants from "../data/RestaurantData";
 import { useNavigate } from "react-router-dom"; 
 
@@ -67,12 +67,12 @@ const RestaurantDetail = () => {
             </div>
 
             <div className="flex flex-col gap-1">
-              <h2 className="font-semibold ">Description</h2>
+              <h2 className="font-semibold ">Deskripsi</h2>
               <p className="text-gray-500">{data.description}</p>
             </div>
 
             <div className="flex flex-col gap-1 ">
-              <h2 className="font-semibold ">Foods</h2>
+              <h2 className="font-semibold ">Makanan</h2>
               <div className="flex gap-2 items-center flex-wrap">
                 {data.strFoods.map((food) => (
                   <div
@@ -85,6 +85,27 @@ const RestaurantDetail = () => {
               </div>
             </div>
 
+            <div className="flex flex-col gap-1 ">
+              <h2 className="font-semibold ">Minuman</h2>
+              <div className="flex gap-2 items-center flex-wrap">
+                {data.strDrinks.map((drink) => (
+                  <div
+                    key={drink}
+                    className="w-fit border hover:cursor-pointer hover:border-primary duration-500 rounded-lg py-2 px-4"
+                  >
+                    {drink}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Embed Google Maps */}
+            <div className="flex flex-col gap-1">
+              <h2 className="font-semibold ">Lokasi</h2>
+              <div className="flex gap-2 items-center flex-wrap">
+              <iframe src={data.locationPoint} width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
           </div>
         </div>
       )}{" "}

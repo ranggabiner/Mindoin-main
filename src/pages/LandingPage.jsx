@@ -101,7 +101,7 @@ const LandingPage = () => {
                       className="w-full h-[160px] group-hover:scale-110 duration-500  object-cover rounded-t-lg hover:"
                     />
                     <p className="block absolute bg-primary text-white rounded-full p-2 text-xs font-semibold bottom-3 left-2">
-                      {food.strArea}
+                      {food.strCategory}
                     </p>
                   </div>
 

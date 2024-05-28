@@ -13,7 +13,7 @@ const CatalogueSection = () => {
         <div className="flex flex-col items-center justify-center">
           <div className="flex gap-2 items-center text-primary font-bold text-[40px]">
             <Utensils size="40" />
-            <h2>20</h2>
+            <h2>1</h2>
           </div>
           <p className="text-tertiary text-xl">Restaurants</p>
         </div>
@@ -22,7 +22,7 @@ const CatalogueSection = () => {
         <div className="flex flex-col items-center justify-center">
           <div className="flex gap-2 items-center text-primary font-bold text-[40px]">
             <Beef size="40" />
-            <h2>8</h2>
+            <h2>1</h2>
           </div>
           <p className="text-tertiary text-xl">Foods</p>
         </div>
@@ -31,7 +31,7 @@ const CatalogueSection = () => {
         <div className="flex flex-col items-center justify-center">
           <div className="flex gap-2 items-center text-primary font-bold text-[40px]">
             <MessageCircle size="40" />
-            <h2>50+</h2>
+            <h2>58+</h2>
           </div>
           <p className="text-tertiary text-xl">Reviews</p>
         </div>

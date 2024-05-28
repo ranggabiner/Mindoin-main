@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Star } from "lucide-react";
 
 const FavoritePage = () => {
-  const [restaurants, setRestaurants] = useState(
+  const [restaurantsData, setRestaurants] = useState(
     JSON.parse(localStorage.getItem("favoriteRestaurants")) || []
   );
   const [foodsData, setFoodsData] = useState(
@@ -28,17 +28,17 @@ const FavoritePage = () => {
         </div>
         <div className="w-[85%] mx-auto flex flex-col gap-9">
           <div id="restaurants" className="flex flex-col gap-6">
-            <h1 className="text-3xl font-bold text-center">Restaurants</h1>
+            <h1 className="text-3xl mt-8 font-bold text-center">Restaurants</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {restaurants.map((restaurant) => (
+              {restaurantsData.map((restaurant) => (
                 <button
-                  key={restaurant.id}
-                  onClick={() => navigate(`/restaurant/${restaurant.id}`)}
-                  className="rounded-lg border-2 text-start overflow-hidden"
+                  key={restaurant.idRestaurant}
+                  onClick={() => navigate(`/restaurant/${restaurant.idRestaurant}`)}
+                  className="border-2 text-start overflow-hidden rounded-lg"
                 >
                   <div className="relative group overflow-hidden">
                     <img
-                      src={`https://restaurant-api.dicoding.dev/images/small/${restaurant.pictureId}`}
+                      src={restaurant.restaurantPicture}
                       alt={restaurant.name}
                       className="w-full h-[160px] group-hover:scale-110 duration-500  object-cover rounded-t-lg hover:"
                     />
@@ -52,28 +52,22 @@ const FavoritePage = () => {
                       <a className="text-xl font-bold hover:cursor-pointer hover:underline duration-300">
                         {restaurant.name}
                       </a>
-
-                      <div className="text-yellow-400 font-bold text-yellow flex gap-1 items-center">
-                        <Star size={20} className="" fill="rgb(250,204,1)" />
-                        <p>{restaurant.rating}</p>
-                      </div>
                     </div>
                     <p className="line-clamp-4 text-sm text-tertiary mt-1">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Ad corporis commodi, quibusdam itaque rem qui delectus
-                      quidem tempora voluptas id, eius sapiente deserunt
-                      adipisci accusantium soluta doloribus nihil cumque
-                      expedita.
+                      {restaurant.description}
                     </p>
                   </div>
                 </button>
               ))}
             </div>
-            {restaurants.length === 0 && (
-              <h2 className="font-bold text-tertiary text-2xl text-center">{`There is no Favorite Restaurants :(`}</h2>
+            {restaurantsData.length === 0 && (
+              <h2 className="font-bold text-2xl text-center text-tertiary">{`There is no Favorite Foods :(`}</h2>
             )}
           </div>
+        </div>
 
+
+        <div className="w-[85%] mx-auto flex flex-col gap-9">
           <div id="foods" className="flex flex-col gap-6">
             <h1 className="text-3xl mt-8 font-bold text-center">Foods</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -112,6 +106,7 @@ const FavoritePage = () => {
             )}
           </div>
         </div>
+
       </div>
     </div>
   );
