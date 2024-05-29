@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { Heart, Star } from "lucide-react";
+import { Heart } from "lucide-react";
 import foods from "../data/FoodData";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 const FoodDetail = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const params = useParams();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
@@ -16,30 +16,24 @@ const FoodDetail = () => {
   }, []);
 
   const fetchData = async () => {
-    const tempData = foods.filter((food) => food.idMeal === params.id)[0];
+    const tempData = foods.find((food) => food.idMeal === params.id);
     setData(tempData);
     setIsFavorite(
-      JSON.parse(localStorage.getItem("favoriteFoods")).filter(
+      JSON.parse(localStorage.getItem("favoriteFoods") || "[]").some(
         (food) => food.idMeal === tempData.idMeal
-      ).length > 0
+      )
     );
   };
 
   const handleFavorite = () => {
-    const favoriteData =
-      JSON.parse(localStorage.getItem("favoriteFoods")) || [];
+    const favoriteData = JSON.parse(localStorage.getItem("favoriteFoods") || "[]");
 
     if (!isFavorite) {
-      localStorage.setItem(
-        "favoriteFoods",
-        JSON.stringify([...favoriteData, data])
-      );
+      localStorage.setItem("favoriteFoods", JSON.stringify([...favoriteData, data]));
     } else {
       localStorage.setItem(
         "favoriteFoods",
-        JSON.stringify([
-          ...favoriteData.filter((food) => food.idMeal !== data.idMeal),
-        ])
+        JSON.stringify(favoriteData.filter((food) => food.idMeal !== data.idMeal))
       );
     }
 
@@ -57,7 +51,7 @@ const FoodDetail = () => {
               className="h-[250px] object-cover w-full"
             />
             <p className="block absolute bg-primary text-white rounded-full p-2 text-xs font-semibold bottom-2 left-6">
-              {data.strArea}
+              {data.strCategory}
             </p>
           </div>
 
@@ -67,12 +61,12 @@ const FoodDetail = () => {
             </div>
 
             <div className="flex flex-col gap-1">
-              <h2 className="font-semibold ">Description</h2>
+              <h2 className="font-semibold ">Deskripsi</h2>
               <p className="text-gray-500">{data.strDescription}</p>
             </div>
 
             <div className="flex flex-col gap-1 ">
-              <h2 className="font-semibold ">Ingredients</h2>
+              <h2 className="font-semibold ">Komposisi</h2>
               <div className="flex gap-2 items-center flex-wrap">
                 {data.strIngredients.map((ingredient) => (
                   <div
@@ -85,15 +79,25 @@ const FoodDetail = () => {
               </div>
             </div>
 
-            <h2 className="font-bold">Instructions</h2>
+            <h2 className="font-bold">Rekomendasi Restoran</h2>
             <div className="flex gap-2 items-center flex-wrap">
-              <p>{data.strInstructions}</p>
+              {data.recomendationRestaurants.map((restaurant, index) => (
+                <a
+                  key={index}
+                  href={data.recomendationRestauranLocationPoint[index]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-primary text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+                >
+                  {restaurant}
+                </a>
+              ))}
             </div>
           </div>
         </div>
-      )}{" "}
+      )}
       <button
-        onClick={() => handleFavorite()}
+        onClick={handleFavorite}
         className="bg-red-500 fixed bottom-12 right-12 p-4 rounded-full"
       >
         <Heart

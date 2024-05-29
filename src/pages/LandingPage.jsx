@@ -132,37 +132,6 @@ const LandingPage = () => {
         <div className=""></div>
       </div>
 
-      <div className="bg-primary py-12 flex flex-col gap-3">
-        <h1 className="text-4xl text-white font-bold text-center">
-          Testimonials
-        </h1>
-
-        <div className="max-w-[1000px] mx-auto gap-x-4 auto-cols-[48%] lg:auto-cols-[49.2%] grid  overflow-x-scroll grid-flow-col w-full snap-x snap-mandatory p-4 ">
-          {customerReviews.map((restaurant) => (
-            <div
-              key={`${restaurant.name} featured restaurant`}
-              className="flex flex-col justify-between gap-4 bg-[#2c3333] group hover:bg-white duration-500 w-full rounded-lg p-4 border-b-[6px] border-[#00c2cb]"
-            >
-              <div className="flex justify-between ">
-                <h2 className="text-[#00c2cb] font-bold text-xl">
-                  {restaurant.name}
-                </h2>
-                <div className="text-yellow-400 font-bold text-yellow flex gap-1 items-center">
-                  <Star size={20} className="" fill="rgb(250,204,1)" />
-                  <p>{restaurant.rating}</p>
-                </div>{" "}
-              </div>
-              <p className="text-center group-hover:text-black text-white font-bold">
-                {restaurant.customerReviews[0].review}
-              </p>
-              <div className="font-medium text-end text-[#d74f24]">
-                <p>{restaurant.customerReviews[0].name}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
       <Footer />
     </div>
   );

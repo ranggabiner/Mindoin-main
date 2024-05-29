@@ -71,6 +71,11 @@ const RestaurantDetail = () => {
               <p className="text-gray-500">{data.description}</p>
             </div>
 
+            <div className="flex flex-col gap-1">
+              <h2 className="font-semibold ">Jam Operasional</h2>
+              <p className="text-gray-500">{data.operationHours}</p>
+            </div>
+
             <div className="flex flex-col gap-1 ">
               <h2 className="font-semibold ">Makanan</h2>
               <div className="flex gap-2 items-center flex-wrap">
