@@ -17,11 +17,11 @@ const Navbar = () => {
           Favorite
         </a>
         <a
-          href="https://www.linkedin.com/in/julia-dinda-591930285"
-          className="text-primary text-xl font-bold"
-        >
-          About Us
-        </a>
+         href="/about-us"
+         className="text-primary text-xl font-bold"
+       >
+         About Us
+       </a>
       </div>
     </div>
   );
